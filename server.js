@@ -43,14 +43,30 @@ app.get('/api/notes', (req, res) => {
 // POST-----------------------
 
 app.post('/api/notes/new', (req, res) => {
-  console.log(req.body);
-  const id = notes.length + 1;
-  const noteBody = req.body.note
-  const note = new Note(id, noteBody);
-  notes.push(note);
-  console.log(noteBody);
-  res.json(notes);
+  const id = uuid();
+  const newNote = {
+    id: id,
+    title: req.body.title,
+    text: req.body.text
+  };
+
+  fs.readFile("./db/db.json", (err, data) => {
+    if (err) throw err;
+    const myNotes = JSON.parse(data);
+    myNotes.push(newNote);
+    fs.writeFile("./db/db.json", JSON.stringify(myNotes, null, 2), err => {
+      if (err) throw err;
+      res.send(db);
+      console.log("Note created!")
+    });
+  });
 });
+  // const noteBody = req.body.note;
+  // const note = new Note(id, noteBody);
+  // db.push(note);
+  // console.log(noteBody);
+  // res.json(notes);
+// });
 
 // DELETE-----------------------
 
