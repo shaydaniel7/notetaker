@@ -1,8 +1,9 @@
 // Dependencies
 // =============================================================
-var express = require('express');
-var path = require('path');
-const Note = require("./models/Note")
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+// const Note = require("./models/Note")
 
 // Sets up the Express App
 // =============================================================
@@ -18,12 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send("welcome to our note taker");
+  res.send("NoteTaker");
 });
 
 app.get("/api/notes", (req, res) => {
   if (notes.length === 0) {
-    return res.json({ message: "there are no notes!" })
+    return res.json({ message: "You have no notes." })
   } else {
     return res.json(notes);
   }
