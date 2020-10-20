@@ -23,15 +23,21 @@ app.use(express.static('./public'));
 // GET-----------------------
 
 app.get('/', (req, res) => {
-  res.send("NoteTaker");
+  res.sendFile(path.join(__dirname,'../public/index.html'));
 });
 
-app.get("/api/notes", (req, res) => {
-  if (notes.length === 0) {
-    return res.json({ message: "You have no notes." })
-  } else {
-    return res.json(notes);
-  }
+app.get("/notes", (req, res) => {
+  res.sendFile(path.join(__dirname,'../public/notes.html'));
+
+  // if (notes.length === 0) {
+  //   return res.json({ message: "You have no notes." })
+  // } else {
+  //   return res.json(notes);
+  // }
+});
+
+app.get('/api/notes', (req, res) => {
+  return res.json(db);
 });
 
 // POST-----------------------
