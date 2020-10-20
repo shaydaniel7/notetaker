@@ -28,7 +28,7 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-  return res.json(db);
+  res.json(db);
 });
 
 // POST-----------------------
@@ -36,7 +36,7 @@ app.post('/api/notes', (req, res) => {
   const note = req.body;
   note.id = uuid();
   db.push(note);
-  fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
+  fs.writeFileSync('./db/db.json', JSON.stringify(db));
   res.json(note);
 
 
