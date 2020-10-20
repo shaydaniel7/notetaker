@@ -54,9 +54,10 @@ app.post('/api/notes', (req, res) => {
     if (err) throw err;
     notes = JSON.parse(data);
     notes.push(newNote);
-    fs.writeFile("./db/db.json", JSON.stringify(notes, null, 2), err => {
-      if (err) throw err;
-      res.send(db);
+    fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
+    // fs.writeFile("./db/db.json", JSON.stringify(notes, null, 2), err => {
+    //   if (err) throw err;
+    //   res.send(db);
       console.log("Note created!")
     });
   });
