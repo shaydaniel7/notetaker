@@ -32,31 +32,38 @@ app.get('/api/notes', (req, res) => {
 });
 
 // POST-----------------------
-app.post('/notes', (req, res) => {
-  fs.readFile('/db/db.json', (err, data) => {
-    if (err) throw err;
-    db = JSON.parse(data);
-    db.push(req.body);
-    fs.writeFile('/db/db.json', JSON.stringify(db));
-  });
-});
-
-
 app.post('/api/notes', (req, res) => {
-  const id = uuid();
-  const newNote = {
-    id: id,
-    title: req.body.title,
-    text: req.body.text
-  };
+  const note = req.body;
+  note.id = uuid();
+  db.push(note);
+  fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
+  res.json(note);
 
-  fs.readFile('/db/db.json', (err, data) => {
-    if (err) throw err;
-    db = JSON.parse(data);
-    db.push(newNote);
-    fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
-    res.json(db);
-  });
+
+  //   fs.readFile('/db/db.json', (err, data) => {
+  //     if (err) throw err;
+  //     db = JSON.parse(data);
+  //     db.push(req.body);
+  //     fs.writeFile('/db/db.json', JSON.stringify(db));
+  //   });
+  // // });
+
+
+  // app.post('/api/notes', (req, res) => {
+  //   const id = uuid();
+  //   const newNote = {
+  //     id: id,
+  //     title: req.body.title,
+  //     text: req.body.text
+  //   };
+
+  // fs.readFile('/db/db.json', (err, data) => {
+  //   if (err) throw err;
+  //   db = JSON.parse(data);
+  //   db.push(newNote);
+  //   fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
+  //   res.json(db);
+  // });
 });
 
 
