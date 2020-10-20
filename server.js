@@ -33,28 +33,11 @@ app.get('/api/notes', (req, res) => {
 
 // POST-----------------------
 app.post('/api/notes', (req, res) => {
-
-  const noteId = uuid();
-  const newNote = {
-    id: noteId,
-    title: req.body.title,
-    text: req.body.text
-  };
-
-  fs.readFile("./db/db.json", "utf8", (err, data) => {
-    if (err) throw err;
-
-    const allNotes = JSON.parse(data);
-
-    allNotes.push(newNote);
-
-    fs.writeFile('./db/db.json', JSON.stringify(allNotes, null, 2), err => {
-      if (err) throw err;
-      res.send(db);
-      console.log("Note created!")
-    });
-  });
-});
+  const note = req.body;
+  note.id = uuid();
+  db.push(note);
+  fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
+  res.json(note);
 
 
   //   fs.readFile('/db/db.json', (err, data) => {
