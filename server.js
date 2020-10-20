@@ -13,7 +13,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 //notes
-const notes = [];
+// const notes = [];
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -26,14 +26,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-app.get("/notes", (req, res) => {
+app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './public/notes.html'));
-
-  // if (notes.length === 0) {
-  //   return res.json({ message: "You have no notes." })
-  // } else {
-  //   return res.json(notes);
-  // }
 });
 
 app.get('/api/notes', (req, res) => {
@@ -50,23 +44,16 @@ app.post('/api/notes', (req, res) => {
     text: req.body.text
   };
 
-  fs.readFile("./db/db.json", (err, data) => {
+  fs.readFile('./db/db.json', (err, data) => {
     if (err) throw err;
-    notes = JSON.parse(data);
-    notes.push(newNote);
+    db = JSON.parse(data);
+    db.push(newNote);
     fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
-    // fs.writeFile("./db/db.json", JSON.stringify(notes, null, 2), err => {
-    //   if (err) throw err;
-    //   res.send(db);
-    res.json(notes);
+    res.json(db);
   });
 });
 
-// const noteBody = req.body.note;
-// const note = new Note(id, noteBody);
-// db.push(note);
-// console.log(noteBody);
-// });
+
 
 // DELETE-----------------------
 
