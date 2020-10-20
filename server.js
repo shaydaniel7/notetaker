@@ -33,42 +33,25 @@ app.get('/api/notes', (req, res) => {
 
 // POST-----------------------
 app.post('/api/notes', (req, res) => {
-  const note = req.body;
-  note.id = uuid();
-  db.push(note);
+  const newNote = req.body;
+  newNote.id = uuid();
+  db.push(newNote);
   fs.writeFileSync('./db/db.json', JSON.stringify(db));
-  res.json(note);
+  res.json(newNote);
 
-
-  //   fs.readFile('/db/db.json', (err, data) => {
-  //     if (err) throw err;
-  //     db = JSON.parse(data);
-  //     db.push(req.body);
-  //     fs.writeFile('/db/db.json', JSON.stringify(db));
-  //   });
-  // // });
-
-
-  // app.post('/api/notes', (req, res) => {
-  //   const id = uuid();
-  //   const newNote = {
-  //     id: id,
-  //     title: req.body.title,
-  //     text: req.body.text
-  //   };
-
-  // fs.readFile('/db/db.json', (err, data) => {
-  //   if (err) throw err;
-  //   db = JSON.parse(data);
-  //   db.push(newNote);
-  //   fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
-  //   res.json(db);
-  // });
 });
 
-
-
 // DELETE-----------------------
+
+app.delete('/api/notes/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const newNotes = notes.filter((note) => {
+    return note.id !== id;
+  });
+  fs.writeFileSync('./db/db.json', JSON.stringify(newNotes));
+  notes = newNotes;
+  res.json(newNotes);
+});
 
 // Starts the server to begin listening
 // =============================================================
