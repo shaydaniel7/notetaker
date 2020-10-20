@@ -3,20 +3,23 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const db = require('./db/db.json')
 // const Note = require("./models/Note")
 
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 //notes
 const notes = [];
 
-
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('./public'));
+
+// GET-----------------------
 
 app.get('/', (req, res) => {
   res.send("NoteTaker");
@@ -30,6 +33,8 @@ app.get("/api/notes", (req, res) => {
   }
 });
 
+// POST-----------------------
+
 app.post('/api/notes/new', (req, res) => {
   console.log(req.body);
   const id = notes.length + 1;
@@ -39,6 +44,8 @@ app.post('/api/notes/new', (req, res) => {
   console.log(noteBody);
   res.json(notes);
 });
+
+// DELETE-----------------------
 
 // Starts the server to begin listening
 // =============================================================
