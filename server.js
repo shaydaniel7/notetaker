@@ -42,7 +42,7 @@ app.get('/api/notes', (req, res) => {
 
 // POST-----------------------
 
-app.post('/api/notes/new', (req, res) => {
+app.post('/api/notes', (req, res) => {
   const id = uuid();
   const newNote = {
     id: id,
