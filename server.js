@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const db = require('./db/db.json')
-const uuid = require('uuid/v4');
+// const uuid = require('uuid/v4');
 // const Note = require("./models/Note")
 
 // Sets up the Express App
