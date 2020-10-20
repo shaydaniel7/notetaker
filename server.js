@@ -23,11 +23,11 @@ app.use(express.static('./public'));
 // GET-----------------------
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'../public/index.html'));
+  res.sendFile(path.join(__dirname,'./public/index.html'));
 });
 
 app.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname,'../public/notes.html'));
+  res.sendFile(path.join(__dirname,'./public/notes.html'));
 
   // if (notes.length === 0) {
   //   return res.json({ message: "You have no notes." })
