@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const db = require('./db/db.json')
-const uuid = require('uuid');
+// const uuid = require('uuid');
 // const Note = require("./models/Note")
 
 // Sets up the Express App
@@ -34,11 +34,16 @@ app.get('/api/notes', (req, res) => {
 // POST-----------------------
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
-  newNote.id = uuid();
+  if (notes.length === 0) {
+    newNote.id = 1;
+  } else {
+    const newNoteId = notes[notes.length - 1].id + 1;
+    newNote.id = newNoteId;
+  }
+  // newNote.id = uuid();
   db.push(newNote);
   fs.writeFileSync('./db/db.json', JSON.stringify(db));
   res.json(newNote);
-
 });
 
 // DELETE-----------------------
