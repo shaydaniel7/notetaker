@@ -34,10 +34,10 @@ app.get('/api/notes', (req, res) => {
 // POST-----------------------
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
-  if (notes.length === 0) {
+  if (db.length === 0) {
     newNote.id = 1;
   } else {
-    const newNoteId = notes[notes.length - 1].id + 1;
+    const newNoteId = db[db.length - 1].id + 1;
     newNote.id = newNoteId;
   }
   // newNote.id = uuid();
@@ -50,11 +50,11 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const newNotes = notes.filter((note) => {
+  const newNotes = db.filter((note) => {
     return note.id !== id;
   });
   fs.writeFileSync('./db/db.json', JSON.stringify(newNotes));
-  notes = newNotes;
+  db = newNotes;
   res.json(newNotes);
 });
 
