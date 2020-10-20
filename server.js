@@ -44,7 +44,7 @@ app.post('/api/notes', (req, res) => {
     text: req.body.text
   };
 
-  fs.readFile('./db/db.json', (err, data) => {
+  fs.readFile('/db/db.json', (err, data) => {
     if (err) throw err;
     db = JSON.parse(data);
     db.push(newNote);
