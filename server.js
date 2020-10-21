@@ -3,9 +3,10 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const db = require('./db/db.json')
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid'); 
+// ^ had to google this
 
-// Sets up the Express App
+// Set up Express App
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('./public'));
 
-// GET-----------------------
+// GET  -----------------------
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
@@ -27,20 +28,19 @@ app.get('/api/notes', (req, res) => {
   res.json(db);
 });
 
-// POST-----------------------
+// POST  ----------------------
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
   newNote.id = uuidv4();
-  console.log("new note id works");
   db.push(newNote);
   fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
   res.json(newNote);
 });
 
-// DELETE-----------------------
+// DELETE  -----------------------
 app.delete('/api/notes/:id', (req, res) => {
   const noNote = req.params.id;
-  db.splice(req.params.id, 1)
+  db.splice(noNote, 1)
   fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(db));
   res.json({ok:true});
 });
