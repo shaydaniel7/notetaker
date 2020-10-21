@@ -82,9 +82,9 @@ html, body {
 }
 
 .list-group-item {
-  transition-duration: 0.5s;
+  transition-duration: 0.25s;
   border: #000000 solid 1px;
-  background-color: rgb(226, 226, 226);
+  background-color: rgb(230, 230, 230);
 }
 
 .list-group-item:hover {
