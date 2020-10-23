@@ -6,7 +6,7 @@ This app will allow a user to create and save notes, view previously saved notes
 
 ## Usage
 
-Use this [note taker app](https://stormy-garden-29411.herokuapp.com/) when you need to create a note.  [Here](https://drive.google.com/file/d/14vSCg4P-FIgnjmqJm85uwd_9bgPRV5T3/view?usp=sharing "Link to video showing how to use this app") is a short video showing how to use this application.
+Use this [note taker app](https://stormy-garden-29411.herokuapp.com/) when you need to create a note.  [Here](https://drive.google.com/file/d/1JQlo4l0zlfOfbisCjROhsizH0IrLgpcC/view?usp=sharing "Link to video showing how to use this app") is a short video showing how to use this application.
 
 ## Screenshot
 
