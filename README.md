@@ -22,7 +22,7 @@ Use this [note taker app](https://stormy-garden-29411.herokuapp.com/) when you n
 * CSS
 * Javascript
 * NodeJS
-    * Express
+* Express
 
 ## Information
 
